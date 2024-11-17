@@ -1,1 +1,1 @@
-![ThoughtLane](./client/public/logo.jpg)
+![ThoughtLane](https://drive.google.com/file/d/1cFpZD-0OUL0Hvkj485eeC0VbJvIKMcUe/view?usp=sharing)
