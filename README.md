@@ -1,1 +1,1 @@
-# ThoughtLane
+![ThoughtLane](./client/public/logo.jpg)
