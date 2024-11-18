@@ -2,14 +2,24 @@ import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css'
 import {useState} from "react"
 import {Navigate} from "react-router-dom"
+import {useContext} from "react";
+import {UserContext} from "../UserContext";
 import Editor from "../Editor"
 
 export default function CreatePost() {
+  const {setUserInfo,userInfo} = useContext(UserContext)
   const [title,setTitle] = useState('')
   const [summary,setSummary] = useState('')
   const [content,setContent] = useState('')
   const [files, setFiles] = useState('')
   const [redirect, setRedirect] = useState(false)
+
+  const username = userInfo?.username
+  if (!username) {
+    alert("Please login first")
+    return <Navigate to={'/login'} />
+  }
+
   async function createNewPost(ev) {
     const data = new FormData()
     data.set('title', title)
