@@ -23,10 +23,10 @@ mongoose.connect('mongodb+srv://raunakbagaria2015:WARybLxvLuBvvrHq@cluster0.a05b
 
 app.post('/register', async (req,res) => {
   const {username,password} = req.body
-  try{
+  try {
     const userDoc = await User.create({
       username,
-      password:bcrypt.hashSync(password,salt),
+      password: bcrypt.hashSync(password,salt),
     })
     res.json(userDoc)
   } catch(e) {
@@ -38,9 +38,13 @@ app.post('/register', async (req,res) => {
 app.post('/login', async (req,res) => {
   const {username,password} = req.body
   const userDoc = await User.findOne({username})
+
+  if (!userDoc) {
+    return res.status(400).json({ error: 'User does not exist' });
+  }
+
   const passOk = bcrypt.compareSync(password, userDoc.password)
   if (passOk) {
-    // logged in
     jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
       if (err) throw err
       res.cookie('token', token).json({
@@ -49,7 +53,7 @@ app.post('/login', async (req,res) => {
       })
     })
   } else {
-    res.status(400).json('wrong credentials')
+    res.status(400).json({ error: 'Wrong credentials' });
   }
 })
 
