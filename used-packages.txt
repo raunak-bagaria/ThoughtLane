@@ -8,3 +8,4 @@ jsonwebtoken
 cookie-parser : Middleware to parse cookies from client requests
 multer: Middleware for handling file uploads
 fs: Node.js file system module for renaming/moving files
+heroicons.com : For icons

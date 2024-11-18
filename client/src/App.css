@@ -21,6 +21,7 @@ header{
     margin-top: 20px;  
     margin-bottom: 50px;
     align-items: center;
+    background-color: rgb(225, 196, 158);
 }
 header a{
     text-decoration:none;
@@ -186,4 +187,41 @@ div.post-page a.edit-btn{
 }
 a svg{
     height:20px;
+}
+
+footer a{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 100px;
+    text-decoration: none;
+    color: rgb(34, 32, 32);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+footer a:hover {
+    background-color: #bfa8c7;
+    font-size: 1.2rem;
+}
+
+.about-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-top: 20px;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+}
+
+.team-member h4 {
+    margin-right: 10px;
 }

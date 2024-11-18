@@ -8,6 +8,21 @@ export default function AboutUs() {
                 At ThoughtLane, we believe every thought deserves a lane to travel on, and we aim to connect readers and writers in a community fueled by curiosity and passion. Whether you're here to learn, reflect, or spark a conversation, we're here to guide your journey.
                 <br></br><br></br>
                 Join us in exploring the lanes of thought that shape our world.</div>
+            
+            <h4>We’d love to hear from you! Share your suggestions, feedback, or just drop us a message—we’re always here to connect and improve.</h4>
+            <h3>Team</h3>
+            <div className="team-member">
+                <h4>- Raunak Bagaria:</h4>
+                <p>raunakbagaria.rb@gmail.com</p>
+            </div>
+            <div className="team-member">
+                <h4>- R Jeevith:</h4>
+                <p>jeevithanish2005@gmail.com</p>
+            </div>
+            <div className="team-member">
+                <h4>- Rajveer Singh Chouhan:</h4>
+                <p>rajveer301singh@gmail.com</p>
+            </div>
         </div>
     )
 }
