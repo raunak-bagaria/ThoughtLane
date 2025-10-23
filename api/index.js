@@ -91,6 +91,37 @@ app.post('/logout', (req,res) => {
   res.cookie('token', '').json('ok')
 })
 
+// Upload content images (for rich text editor)
+app.post('/upload-content-image', uploadMiddleware.single('file'), async (req, res) => {
+  try {
+    const {token} = req.cookies;
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+    
+    jwt.verify(token, secret, {}, async (err, info) => {
+      if (err) return res.status(401).json({ error: 'Invalid token' });
+      
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+      
+      try {
+        // Upload to Supabase Storage
+        const imageUrl = await StorageService.uploadFile(req.file);
+        res.json({ url: imageUrl });
+      } catch (uploadError) {
+        console.error('Error uploading content image:', uploadError);
+        res.status(500).json({ error: 'Failed to upload image' });
+      }
+    });
+  } catch(e) {
+    console.log(e);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.post('/post', uploadMiddleware.single('file'), async (req,res) => {
   try {
     let cover_image_url = null;
