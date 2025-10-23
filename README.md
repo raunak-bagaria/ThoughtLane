@@ -1,1 +1,1 @@
-![ThoughtLane](logo.jpg "Logo")
+![ThoughtLane](public/logo.jpg "Logo")
