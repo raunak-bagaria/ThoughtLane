@@ -19,10 +19,6 @@ export default function AboutUs() {
                 <h4>- R Jeevith:</h4>
                 <p>jeevithanish2005@gmail.com</p>
             </div>
-            <div className="team-member">
-                <h4>- Rajveer Singh Chouhan:</h4>
-                <p>rajveer301singh@gmail.com</p>
-            </div>
         </div>
     )
 }

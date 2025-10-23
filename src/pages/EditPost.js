@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react"
 import {Navigate, useParams} from "react-router-dom"
 import Editor from "../Editor"
+import TagInput from "../components/TagInput"
 import API_BASE_URL from "../config/api"
 
 export default function EditPost() {
@@ -9,6 +10,7 @@ export default function EditPost() {
   const [summary,setSummary] = useState('')
   const [content,setContent] = useState('')
   const [files, setFiles] = useState('')
+  const [tags, setTags] = useState([])
   const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
@@ -18,9 +20,12 @@ export default function EditPost() {
           setTitle(postInfo.title)
           setContent(postInfo.content)
           setSummary(postInfo.summary)
+          if (postInfo.tags && postInfo.tags.length > 0) {
+            setTags(postInfo.tags)
+          }
         })
       })
-  }, [])
+  }, [id])
 
   async function updatePost(ev) {
     ev.preventDefault()
@@ -32,6 +37,10 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set('file', files?.[0])
     }
+    
+    // Process tags - send as JSON array
+    data.set('tags', JSON.stringify(tags));
+    
     const response = await fetch(`${API_BASE_URL}/post`, {
       method: 'PUT',
       body: data,
@@ -56,6 +65,10 @@ export default function EditPost() {
              placeholder={'Summary'}
              value={summary}
              onChange={ev => setSummary(ev.target.value)} />
+      <TagInput 
+        selectedTags={tags}
+        onTagsChange={setTags}
+      />
       <input type="file"
              onChange={ev => setFiles(ev.target.files)} />
       <Editor onChange={setContent} value={content} />
