@@ -83,29 +83,20 @@ export default function IndexPage() {
         <Post key={post._id} {...post} />
       ))}
       
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '30px', marginBottom: '30px' }}>
+      {/* --- REPLACE IT WITH THIS --- */}
+      <div className="pagination">
         <button 
           onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
           disabled={currentPage === 1}
-          style={{ 
-            padding: '10px 20px', 
-            cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-            opacity: currentPage === 1 ? 0.5 : 1
-          }}
         >
           ← Previous
         </button>
-        <span style={{ padding: '10px 20px', display: 'flex', alignItems: 'center' }}>
+        <span>
           Page {currentPage}
         </span>
         <button 
           onClick={() => setCurrentPage(prev => prev + 1)}
           disabled={!hasMore}
-          style={{ 
-            padding: '10px 20px', 
-            cursor: !hasMore ? 'not-allowed' : 'pointer',
-            opacity: !hasMore ? 0.5 : 1
-          }}
         >
           Next →
         </button>
