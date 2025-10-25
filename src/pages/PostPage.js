@@ -5,6 +5,25 @@ import {UserContext} from "../UserContext"
 import {Link} from 'react-router-dom'
 import API_BASE_URL from "../config/api"
 
+// Add this helper function below your imports
+const tagColors = [
+  '#0052CC', // Blue (our current accent)
+  '#36B37E', // Green
+  '#FFAB00', // Yellow/Orange
+  '#6554C0', // Purple
+  '#00B8D9', // Teal
+  '#FF5630', // Red
+];
+
+function getTagColor(tagName) {
+  let hash = 0;
+  for (let i = 0; i < tagName.length; i++) {
+    hash = tagName.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % tagColors.length;
+  return tagColors[index];
+}
+
 export default function PostPage() {
   const [postInfo,setPostInfo] = useState(null)
   const [comments, setComments] = useState([])
@@ -14,6 +33,7 @@ export default function PostPage() {
   const {userInfo} = useContext(UserContext)
   const {id} = useParams()
   const navigate = useNavigate()
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/post/${id}`)
       .then(response => {
@@ -186,26 +206,23 @@ export default function PostPage() {
       <h1>{postInfo.title}</h1>
       <time>{format(new Date(postInfo.createdAt), "d MMM, yyyy  HH:mm")}</time>
       <div className="author">by @{postInfo.author.username}</div>
+      
+      
       {postInfo.tags && postInfo.tags.length > 0 && (
-        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <div className="tags-container">
           {postInfo.tags.map((tag, index) => (
             <span 
               key={index} 
-              style={{ 
-                display: 'inline-block',
-                backgroundColor: '#007BFF',
-                color: 'white',
-                padding: '5px 10px',
-                borderRadius: '15px',
-                marginRight: '5px',
-                fontSize: '0.85rem'
-              }}
+              className="tag"
+              style={{ backgroundColor: getTagColor(tag) }} 
             >
               {tag}
             </span>
           ))}
         </div>
       )}
+
+
       {userInfo?.id === postInfo.author._id && (
         <div className="edit-row">
           <Link className="edit-btn" to={`/edit/${postInfo._id}`}>
@@ -214,16 +231,7 @@ export default function PostPage() {
             </svg>
             Edit this post
           </Link>
-          <button 
-            onClick={deletePost}
-            style={{ 
-              backgroundColor: '#dc3545',
-              marginTop: '10px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '5px'
-            }}
-          >
+          <button onClick={deletePost} className="delete-btn">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{width: '20px', height: '20px'}}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>
@@ -231,6 +239,7 @@ export default function PostPage() {
           </button>
         </div>
       )}
+      
       <div className="image">
         {postInfo.cover && (
           <img src={coverImageUrl} alt=""/>
@@ -238,24 +247,11 @@ export default function PostPage() {
       </div>
       <div className="content" dangerouslySetInnerHTML={{__html:postInfo.content}} />
       
-      {/* Post Like Button */}
-      <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #eee' }}>
+      {/* --- POST LIKE BUTTON --- */}
+      <div className="like-section">
         <button
           onClick={togglePostLike}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '10px 20px',
-            backgroundColor: postLikes.userLiked ? '#007BFF' : '#f0f0f0',
-            color: postLikes.userLiked ? 'white' : '#333',
-            border: 'none',
-            borderRadius: '20px',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: '500',
-            transition: 'all 0.2s'
-          }}
+          className={postLikes.userLiked ? 'like-btn liked' : 'like-btn'}
         >
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -271,100 +267,54 @@ export default function PostPage() {
         </button>
       </div>
       
-      {/* Comments Section */}
-      <div style={{ marginTop: '40px', borderTop: '1px solid #ddd', paddingTop: '20px' }}>
+      {/* --- COMMENTS SECTION --- */}
+      <div className="comments-section">
         <h3>Comments ({comments.length})</h3>
         
         {userInfo?.id && (
-          <form onSubmit={createComment} style={{ marginTop: '20px', marginBottom: '30px' }}>
+          <form onSubmit={createComment} className="comment-form">
             <textarea
               placeholder="Write a comment..."
               value={commentContent}
               onChange={ev => setCommentContent(ev.target.value)}
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ddd',
-                borderRadius: '5px',
-                minHeight: '80px',
-                fontFamily: 'inherit',
-                fontSize: '14px'
-              }}
             />
-            <button
-              type="submit"
-              style={{
-                marginTop: '10px',
-                padding: '8px 20px',
-                backgroundColor: '#333',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}
-            >
+            <button type="submit">
               Post Comment
             </button>
           </form>
         )}
         
         {!userInfo?.id && (
-          <p style={{ color: '#666', fontStyle: 'italic', marginTop: '20px' }}>
+          <p className="login-prompt">
             Please login to comment
           </p>
         )}
         
-        <div style={{ marginTop: '20px' }}>
+        <div className="comment-list">
           {comments.map(comment => (
-            <div key={comment._id} style={{
-              padding: '15px',
-              marginBottom: '15px',
-              backgroundColor: '#f9f9f9',
-              borderRadius: '5px',
-              border: '1px solid #eee'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <div key={comment._id} className="comment">
+              <div className="comment-header">
                 <div>
                   <strong>{comment.author.username}</strong>
-                  <span style={{ color: '#666', fontSize: '12px', marginLeft: '10px' }}>
+                  <span className="comment-date">
                     {new Date(comment.createdAt).toLocaleDateString()}
                   </span>
                 </div>
                 {userInfo?.id === comment.author._id && (
                   <button
                     onClick={() => deleteComment(comment._id)}
-                    style={{
-                      padding: '4px 8px',
-                      backgroundColor: '#dc3545',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '3px',
-                      cursor: 'pointer',
-                      fontSize: '12px'
-                    }}
+                    className="comment-delete-btn"
                   >
                     Delete
                   </button>
                 )}
               </div>
-              <p style={{ margin: 0, marginBottom: '10px' }}>{comment.content}</p>
+              <p className="comment-content">{comment.content}</p>
               
-              {/* Comment Like Button */}
+              {/* --- COMMENT LIKE BUTTON --- */}
               <button
                 onClick={() => toggleCommentLike(comment._id)}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '5px',
-                  padding: '5px 12px',
-                  backgroundColor: commentLikes[comment._id]?.userLiked ? '#007BFF' : 'transparent',
-                  color: commentLikes[comment._id]?.userLiked ? 'white' : '#666',
-                  border: '1px solid #ddd',
-                  borderRadius: '15px',
-                  cursor: 'pointer',
-                  fontSize: '12px',
-                  transition: 'all 0.2s'
-                }}
+                className={commentLikes[comment._id]?.userLiked ? 'comment-like-btn liked' : 'comment-like-btn'}
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -382,7 +332,7 @@ export default function PostPage() {
           ))}
           
           {comments.length === 0 && (
-            <p style={{ color: '#999', fontStyle: 'italic' }}>
+            <p className="login-prompt">
               No comments yet. Be the first to comment!
             </p>
           )}

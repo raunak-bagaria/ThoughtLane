@@ -334,7 +334,11 @@ footer a:hover {
 }
 
 .pagination button {
-    /* Styles are inherited from the main 'button' rule */
+    /* Set a minimum width so both buttons are the same size */
+    min-width: 120px; 
+    
+    /* Ensure the text inside is centered */
+    text-align: center; 
 }
 
 .pagination button:disabled {
@@ -346,4 +350,187 @@ footer a:hover {
 
 .pagination button:disabled:hover {
     background-color: var(--bg-secondary); /* Prevents hover effect */
+}
+/* Tags */
+.tags-container {
+  text-align: center;
+  margin-bottom: 20px;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.tag {
+  display: inline-block;
+  /* background-color: var(--accent-primary); <-- REMOVED */
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Delete Button */
+.edit-row button.delete-btn {
+  background-color: #dc3545; /* Red for danger */
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+  border: 0;
+  cursor: pointer;
+}
+.edit-row button.delete-btn:hover {
+  background-color: #b02a37;
+}
+
+/* Like Section */
+.like-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  /* Default (unliked) state */
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+.like-btn:hover {
+  background-color: var(--bg-primary);
+}
+/* Liked state (RED) */
+.like-btn.liked {
+  color: #E0245E; /* This is a "like" red */
+  border-color: #E0245E;
+}
+.like-btn.liked:hover {
+  background-color: rgba(224, 36, 94, 0.1); /* Faint red background */
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 40px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+}
+.comments-section h3 {
+  color: var(--text-primary);
+}
+.login-prompt {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* Comment Form */
+.comment-form {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.comment-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 80px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+.comment-form textarea:focus {
+  outline: 2px solid var(--accent-primary);
+  border-color: transparent;
+}
+.comment-form button {
+  padding: 8px 20px;
+  /* Other styles inherited from the global 'button' rule */
+}
+
+/* Comment List */
+.comment-list {
+  margin-top: 20px;
+}
+.comment {
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: var(--bg-secondary);
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+}
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.comment-header strong {
+  color: var(--text-primary);
+}
+.comment-date {
+  color: var(--text-secondary);
+  font-size: 12px;
+  margin-left: 10px;
+}
+.comment-delete-btn {
+  padding: 4px 8px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.comment-delete-btn:hover {
+  background-color: #b02a37;
+}
+.comment-content {
+  margin: 10px 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Comment Like Button */
+.comment-like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  /* Default (unliked) state */
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+.comment-like-btn:hover {
+  background-color: var(--bg-primary);
+}
+/* Liked state (RED) */
+.comment-like-btn.liked {
+  color: #E0245E;
+  border-color: #E0245E;
+}
+.comment-like-btn.liked:hover {
+  background-color: rgba(224, 36, 94, 0.1);
 }
