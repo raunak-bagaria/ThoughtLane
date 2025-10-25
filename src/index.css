@@ -7,40 +7,43 @@
     sans-serif;
   
   /* 2. Light Mode Colors (Default) */
-  --bg-primary: #F4F5F7;        /* Main page background */
-  --bg-secondary: #FFFFFF;      /* Card, Header background */
-  --text-primary: #172B4D;      /* Main text, headings */
-  --text-secondary: #5E6C84;    /* Subheadings, dates, info */
-  --accent-primary: #0052CC;    /* Links, buttons */
-  --accent-primary-hover: #0041A3; /* Button hover */
-  --border-color: #DFE1E6;      /* Input borders, card borders */
-  --shadow-color: rgba(9, 30, 66, 0.15); /* Soft shadow for cards */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* 3. Dark Mode Colors */
-    --bg-primary: #161A1D;
-    --bg-secondary: #22272B;
-    --text-primary: #E1E3E6;
-    --text-secondary: #9B9B9B;
-    --accent-primary: #4C9AFF;
-    --accent-primary-hover: #6BAFFF;
-    --border-color: #444;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-  }
+  --bg-primary: #61bfe2;        /* CHANGED: This is a more noticeable grey background */
+  --bg-secondary: #FFFFFF;      /* This is your white for cards/header */
+  --text-primary: #172B4D;
+  --text-secondary: #5E6C84;
+  --accent-primary: #007BFF;    /* CHANGED: This is a lighter, more vibrant blue */
+  --accent-primary-hover: #0056b3; /* CHANGED: This is the hover for the new blue */
+  --border-color: #DFE1E6;
+  --shadow-color: rgba(9, 30, 66, 0.15);
 }
 
 /* This is your original 'body' rule, now updated with the new variables */
 body {
   margin: 0;
-  font-family: var(--font-family); /* Updated font */
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* Apply your base colors */
-  background-color: var(--bg-primary);
   color: var(--text-primary);
+
+  /* --- YOUR NEW BACKGROUND RULES --- */
+  
+  /* Fallback color if the image doesn't load */
+  background-color: var(--bg-primary); 
+
+  /* Point to your image now inside the src folder */
+  background-image: url('./back_1.jpg'); /* <-- THIS IS THE FIX */
+
+  /* This ensures the image covers the entire page */
+  background-size: cover;
+  
+  /* This prevents the image from repeating */
+  background-repeat: no-repeat;
+  
+  /* This fixes the background so content scrolls over it */
+  background-attachment: fixed;
+  
+  /* This centers the image */
+  background-position: center center;
 }
 
 /* This is your original 'code' rule, preserved */
