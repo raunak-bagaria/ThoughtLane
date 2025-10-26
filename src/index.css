@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 :root {
-  /* 1. Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   
-  /* 2. Light Mode Colors (Default) */
   --bg-primary: #61bfe2;        /* CHANGED: This is a more noticeable grey background */
   --bg-secondary: #FFFFFF;      /* This is your white for cards/header */
   --text-primary: #172B4D;
@@ -25,29 +23,34 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-primary);
 
-  /* --- YOUR NEW BACKGROUND RULES --- */
-  
-  /* Fallback color if the image doesn't load */
-  background-color: var(--bg-primary); 
-
-  /* Point to your image now inside the src folder */
-  background-image: url('./back_1.jpg'); /* <-- THIS IS THE FIX */
-
-  /* This ensures the image covers the entire page */
-  background-size: cover;
-  
-  /* This prevents the image from repeating */
-  background-repeat: no-repeat;
-  
-  /* This fixes the background so content scrolls over it */
-  background-attachment: fixed;
-  
-  /* This centers the image */
-  background-position: center center;
+  /* Make body transparent so the background div can show through */
+  background-color: transparent; 
 }
 
 /* This is your original 'code' rule, preserved */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+/* --- ADD THIS NEW RULE TO THE BOTTOM --- */
+
+#page-background {
+  /* These are all the styles we just cut from 'body' */
+  background-color: var(--bg-primary); 
+  background-image: url('./back_1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  filter: grayscale(40%) opacity(80%);
+
+  /* These styles make it a fixed, full-screen background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  /* This puts it behind all your other content */
+  z-index: -1; 
 }

@@ -32,23 +32,25 @@ export default function Header() {
 
   return (
     <header>
-      <Link to="/" className="logo">
-        {<img src="/logo.jpg" alt="ThoughtLane Logo"/>}
-      </Link>
-      <nav>
-        {username && (
-          <>
-            <Link to="/create">New Post</Link>
-            <a onClick={logout}>Logout ({username})</a>
-          </>
-        )}
-        {!username && (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
-        )}
-      </nav>
+      <div className="header-content"> {/* <-- ADD THIS WRAPPER */}
+        <Link to="/" className="logo">
+          {<img src="/logo.jpg" alt="ThoughtLane Logo"/>}
+        </Link>
+        <nav>
+          {username && (
+            <>
+              <Link to="/create">New Post</Link>
+              <button onClick={logout}>Logout ({username})</button>
+            </>
+          )}
+          {!username && (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )}
+        </nav>
+      </div> {/* <-- AND CLOSE IT HERE */}
     </header>
   )
 }

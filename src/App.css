@@ -11,21 +11,34 @@ img {
 
 /* Main Layout */
 main {
-    padding: 20px;
+    padding: 150px 20px 20px 20px; 
     max-width: 960px;
     margin: 0 auto;
 }
 
-/* Header & Navigation */
 header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: var(--bg-secondary);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--shadow-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensures it stays on top of everything */
+
+  width: 100%;
+  padding: 10px 0;
+  /* margin-bottom: 50px; <-- REMOVED (fixed elements don't push content) */
+  background-color: var(--bg-secondary);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* This new rule keeps the logo/nav centered */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  /* This matches your main content width */
+  max-width: 960px; 
+  margin: 0 auto;
+  padding: 0 20px; /* Add horizontal padding back */
 }
 header a {
     text-decoration: none;
@@ -38,7 +51,8 @@ header nav {
     display: flex;
     gap: 15px;
 }
-header nav a {
+header nav a,
+header nav button {
     text-decoration: none;
     color: var(--text-secondary);
     background-color: transparent;
@@ -47,8 +61,15 @@ header nav a {
     font-weight: 500;
     font-size: 0.9rem;
     transition: all 0.2s ease;
+    
+    /* Add these to reset default button styles */
+    border: none;
+    font-family: inherit; /* Ensures font matches */
+    cursor: pointer;
 }
-header nav a:not([href="/create"]):hover {
+
+header nav a:not([href="/create"]):not([href="/login"]):not([href="/register"]):hover,
+header nav button:hover {
     background-color: var(--bg-primary);
     color: var(--text-primary);
 }
@@ -533,4 +554,79 @@ footer a:hover {
 }
 .comment-like-btn.liked:hover {
   background-color: rgba(224, 36, 94, 0.1);
+}
+.filter-container {
+  margin-bottom: 20px;
+  text-align: right; /* Aligns to the right */
+}
+.filter-container label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: var(--text-primary);
+  /* Adds a shadow to make text visible on the background */
+  text-shadow: 0 0 5px white; 
+}
+.filter-container select {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 2px solid var(--border-color);
+  background: var(--bg-secondary); /* Make sure it has a solid background */
+}
+
+/* 2. Pagination Visibility */
+.pagination button {
+  /* Makes buttons solid white to stand out */
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds shadow for depth */
+}
+.pagination button:hover {
+  background-color: var(--bg-primary); /* Use light grey on hover */
+}
+.pagination button:disabled {
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+.pagination button:disabled:hover {
+  background-color: var(--bg-secondary);
+}
+
+.pagination span {
+  padding: 12px 20px;
+  font-weight: 700; /* Bolder */
+  color: #000000;    /* Black */
+  /* Adds a shadow to make text visible */
+  text-shadow: 0 0 8px white, 0 0 5px white; 
+}
+
+/* 3. Footer "About Us" Visibility */
+footer a {
+  text-decoration: none;
+  color: var(--text-primary); /* Use primary text color */
+  font-size: 1rem;            /* Make it a bit bigger */
+  font-weight: 700;           /* Make it bold */
+  /* Adds a strong shadow to make it pop */
+  text-shadow: 0 0 8px white, 0 0 5px white; 
+  transition: color 0.2s ease;
+}
+footer a:hover {
+  color: var(--accent-primary);
+  background-color: transparent;
+  font-size: 1rem; /* Keep size consistent on hover */
+}
+
+/* 1. Style for Login and Register links */
+header nav a[href="/login"],
+header nav a[href="/register"] {
+  background-color: #dcfbf8; /* CHANGED: This is an even lighter grey */
+  color: var(--text-primary); 
+  font-weight: 500;
+}
+
+/* 2. A hover effect for the Login and Register links */
+header nav a[href="/login"]:hover,
+header nav a[href="/register"]:hover {
+  background-color: var(--bg-primary); /* CHANGED: Hover is now the grey you had before */
 }

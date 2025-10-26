@@ -14,6 +14,8 @@ import AboutUs from "./pages/AboutUs"
 
 function App() {
   return (
+    <>
+    <div id="page-background"></div>
     <UserContextProvider>
       <Routes>
         <Route path="/" element={<Layout/>}>
@@ -27,6 +29,7 @@ function App() {
         </Route>
       </Routes>
     </UserContextProvider>
+    </>
   )
 }
 

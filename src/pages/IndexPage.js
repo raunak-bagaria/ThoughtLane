@@ -65,12 +65,11 @@ export default function IndexPage() {
   
   return (
     <>
-      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        <label style={{ marginRight: '10px', fontWeight: 'bold' }}>Filter by tag:</label>
+      <div className="filter-container">
+        <label>Filter by tag:</label>
         <select 
           value={selectedTag} 
           onChange={(e) => handleTagChange(e.target.value)}
-          style={{ padding: '8px 12px', borderRadius: '5px', border: '2px solid #ddd' }}
         >
           <option value="">All Posts</option>
           {tags.map((tag, index) => (
