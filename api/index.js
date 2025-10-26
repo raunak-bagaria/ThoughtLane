@@ -23,7 +23,14 @@ const secret = process.env.JWT_SECRET || 'asdfe45we45w345wegw345werjktjwertkj'
 const PORT = process.env.BACKEND_PORT || 3000
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:4000'
 
-app.use(cors({credentials:true,origin: FRONTEND_URL}))
+// In production, CORS isn't needed since frontend and backend are on same domain
+// In development, allow localhost
+const corsOptions = {
+  credentials: true,
+  origin: process.env.NODE_ENV === 'production' ? true : FRONTEND_URL
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 // Keep this for backward compatibility with old local uploads
@@ -603,7 +610,19 @@ app.get('/comment/:id/likes', async (req, res) => {
   }
 })
 
+// Serve static files from the React app in production
+if (process.env.NODE_ENV === 'production') {
+  const path = require('path')
+  app.use(express.static(path.join(__dirname, '..', 'build')))
+  
+  // All remaining requests return the React app, so it can handle routing
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'))
+  })
+}
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
   console.log(`Frontend URL: ${FRONTEND_URL}`)
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
 })
