@@ -176,7 +176,7 @@ input {
     padding: 10px 14px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    background-color: var(--bg-primary);
+    background-color: #d3f4ff;
     color: var(--text-primary);
     font-size: 1rem;
 }
@@ -471,7 +471,7 @@ footer a:hover {
   padding: 10px 14px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
-  background-color: var(--bg-primary);
+  background-color: #c3ecfa;
   color: var(--text-primary);
   font-size: 14px;
   font-family: inherit;
@@ -493,7 +493,7 @@ footer a:hover {
 .comment {
   padding: 15px;
   margin-bottom: 15px;
-  background-color: var(--bg-secondary);
+  background-color: #f6f9ff;
   border-radius: 5px;
   border: 1px solid var(--border-color);
 }
