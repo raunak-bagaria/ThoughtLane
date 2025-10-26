@@ -630,3 +630,56 @@ header nav a[href="/login"]:hover,
 header nav a[href="/register"]:hover {
   background-color: var(--bg-primary); /* CHANGED: Hover is now the grey you had before */
 }
+
+.create-post-form {
+  background-color: var(--bg-secondary); /* This is white */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  max-width: 960px; /* Makes it wide enough for the editor */
+  margin: 40px auto;
+}
+
+/* 2. Reset input colors *only* on this page to white */
+.create-post-form input[type="title"],
+.create-post-form input[type="summary"] {
+  background-color: #FFFFFF; /* Force white background */
+}
+
+/* 3. Reset the file input */
+.create-post-form input[type="file"] {
+  background-color: transparent; /* File inputs are special */
+  border: 1px solid var(--border-color);
+  padding: 8px;
+}
+.create-post-form input[type="file"]::file-selector-button {
+  background-color: var(--bg-primary);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.create-post-form .ql-toolbar {
+  background-color: #FFFFFF;
+  border-radius: 5px 5px 0 0; /* Add rounded corners */
+}
+.create-post-form .ql-container {
+  background-color: #FFFFFF;
+  border-radius: 0 0 5px 5px; /* Add rounded corners */
+}
+.create-post-form input[type="file"]::file-selector-button:hover {
+  background-color: #3dbce3; /* A bright bluish-green */
+  border-color: #000000;
+  color: #ffffff; /* Makes text white for better contrast */
+}
+.create-post-form h1 {
+  font-family: 'Great Vibes', cursive; /* Use the new font */
+  text-align: center;
+  color: var(--text-primary);
+  font-weight: 400; 
+  margin-top: 0;
+  margin-bottom: 30px; 
+  font-size: 4 rem; /* This font looks better a bit larger */
+}

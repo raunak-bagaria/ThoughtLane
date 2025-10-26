@@ -125,7 +125,7 @@ export default function TagInput({ selectedTags, onTagsChange }) {
             </button>
           </span>
         ))}
-        <input
+          <input
           ref={inputRef}
           type="text"
           value={inputValue}
@@ -139,7 +139,8 @@ export default function TagInput({ selectedTags, onTagsChange }) {
             flex: '1',
             minWidth: '120px',
             fontSize: '14px',
-            padding: '4px'
+            padding: '4px',
+            backgroundColor: 'transparent' /* <-- ADD THIS LINE */
           }}
         />
       </div>

@@ -49,7 +49,8 @@ export default function CreatePost() {
     return <Navigate to={'/'} />
   }
   return (
-    <form onSubmit={createNewPost}>
+    <form className="create-post-form" onSubmit={createNewPost}>
+      <h1>My New Post</h1>
       <input type="title"
              placeholder={'Title'}
              value={title}
